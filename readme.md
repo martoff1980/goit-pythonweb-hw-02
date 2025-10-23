@@ -1,4 +1,6 @@
-# ДЗ Тема: Основи технології  Docker
+<!-- @format -->
+
+# ДЗ Тема: Основи технології Docker
 
 Створіть віртуальне оточення то встановіть необхідні бібліотеки
 
@@ -8,7 +10,11 @@ pip install -r requirements.txt
 
 Запуск:
 
-```bash 
+```bash
 python main.py
 ```
 
+```запуск
+py -m uvicorn main:app
+
+```

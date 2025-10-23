@@ -1,0 +1,40 @@
+# @format
+
+version: '3.8'
+
+services:
+  app:
+    image: hw02:lates
+    build:
+      context: .
+      dockerfile: Dockerfile # Вкажіть свій Dockerfile
+    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: myappdb
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+    ports:
+      - '8000:8000' # замініть на порт, який використовує ваш застосунок
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    container_name: my_postgres
+    environment:
+      POSTGRES_DB: myappdb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata:
