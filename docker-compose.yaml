@@ -4,11 +4,11 @@ version: '3.8'
 
 services:
   app:
-    image: hw02:lates
+    image: hw02:latest
     build:
       context: .
       dockerfile: Dockerfile # Вкажіть свій Dockerfile
-    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
     depends_on:
       - db
     environment:
@@ -30,8 +30,9 @@ services:
       POSTGRES_DB: myappdb
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
-    ports:
-      - '5432:5432'
+    # Порт можна не проброшувати, якщо не потрібно доступу ззовні:
+    # ports:
+    #   - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: unless-stopped

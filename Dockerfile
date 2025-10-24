@@ -18,5 +18,5 @@ COPY . .
 # Встановлюємо залежності (якщо є requirements.txt)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Запускаємо основний файл (змініть на свій)
-CMD ["python", "main.py"]
+# Команда запуску (рекомендовано для FastAPI)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
